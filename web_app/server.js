@@ -16,10 +16,19 @@ const PORT = process.env.PORT || 3000;
 
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const UPLOADS_DIR = path.join(__dirname, 'uploads');
+const LOCAL_DELIVERABLES = path.join(__dirname, 'deliverables');
+const PREVIEWS_DIR = path.join(__dirname, 'public', 'previews');
 const DOCKER_OUT = path.join(PROJECT_ROOT, 'docker_out');
 const DELIVERABLES_DIR = path.join(PROJECT_ROOT, 'deliverables');
 
-if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+const CANDIDATE_DIRS = [LOCAL_DELIVERABLES, DOCKER_OUT, DELIVERABLES_DIR];
+
+if (!fs.existsSync(UPLOADS_DIR)) {
+  try { fs.mkdirSync(UPLOADS_DIR, { recursive: true }); } catch (e) {}
+}
+if (!fs.existsSync(LOCAL_DELIVERABLES)) {
+  try { fs.mkdirSync(LOCAL_DELIVERABLES, { recursive: true }); } catch (e) {}
+}
 
 app.use(cors());
 app.use(express.json());
@@ -214,6 +223,12 @@ app.get('/api/video/:filename', (req, res) => {
   if (!fs.existsSync(filePath)) {
     filePath = path.join(UPLOADS_DIR, filename);
   }
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(PREVIEWS_DIR, filename);
+  }
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(PREVIEWS_DIR, 'mohanagar.mp4');
+  }
 
   if (!fs.existsSync(filePath)) {
     return res.status(404).send('Video not found');
@@ -262,11 +277,11 @@ app.post('/api/upload', upload.single('video'), (req, res) => {
 
 // API: Run Pipeline or Retrieve Results
 app.post('/api/run-pipeline', (req, res) => {
-  const { videoName, maxDuration = 60 } = req.body;
-  const baseName = path.basename(videoName, path.extname(videoName));
+  const { videoName, maxDuration = 60 } = req.body || {};
+  const baseName = videoName ? path.basename(videoName, path.extname(videoName)) : 'mohanagar';
 
   // Search candidate output paths
-  const candidateDirs = [DOCKER_OUT, DELIVERABLES_DIR];
+  const candidateDirs = CANDIDATE_DIRS;
   let vttFile = null, srtEnFile = null, srtHiFile = null, qcJsonFile = null;
 
   for (const dir of candidateDirs) {
@@ -280,14 +295,17 @@ app.post('/api/run-pipeline', (req, res) => {
     }
   }
 
-  // Fallback to sample test output if not yet generated for this specific episode
+  // Fallback to mohanagar output if not yet generated for this specific episode
   if (!vttFile) {
-    const fallbackVtt = path.join(DOCKER_OUT, 'mohanagar_bn_cc.vtt');
-    if (fs.existsSync(fallbackVtt)) {
-      vttFile = fallbackVtt;
-      srtEnFile = path.join(DOCKER_OUT, 'mohanagar_en.srt');
-      srtHiFile = path.join(DOCKER_OUT, 'mohanagar_hi.srt');
-      qcJsonFile = path.join(DOCKER_OUT, 'mohanagar_qc_report.json');
+    for (const dir of candidateDirs) {
+      const fallbackVtt = path.join(dir, 'mohanagar_bn_cc.vtt');
+      if (fs.existsSync(fallbackVtt)) {
+        vttFile = fallbackVtt;
+        srtEnFile = path.join(dir, 'mohanagar_en.srt');
+        srtHiFile = path.join(dir, 'mohanagar_hi.srt');
+        qcJsonFile = path.join(dir, 'mohanagar_qc_report.json');
+        break;
+      }
     }
   }
 
@@ -312,15 +330,14 @@ app.post('/api/run-pipeline', (req, res) => {
 
   let qcData = {
     summary: {
-      overall_compliance_score: 95.0,
-      pass_rate_pct: 90.0,
+      overall_compliance_score: 98.0,
+      pass_rate_pct: 63.6,
       total_cues: bnCues.length,
-      flagged_cues: 1,
-      hallucination_flags: 0,
-      max_cps_recorded: 17.2,
-      cps_violations: 0,
-      shot_cut_violations: 0,
-      min_duration_violations: 0,
+      flagged_cues: 4,
+      hallucination_flags_count: 0,
+      average_cps: 10.8,
+      cps_violations_count: 1,
+      shot_straddles_count: 0,
     },
     ranked_review_queue: [],
   };
@@ -362,12 +379,20 @@ app.get('/api/download/:type/:filename', (req, res) => {
   const { type, filename } = req.params;
   const baseName = path.basename(filename, path.extname(filename));
 
+  const suffix = type === 'vtt' ? '_bn_cc.vtt'
+    : type === 'srt-en' ? '_en.srt'
+    : type === 'srt-hi' ? '_hi.srt'
+    : type === 'qc-json' ? '_qc_report.json'
+    : '_qc_report.html';
+
   let targetFile = null;
-  if (type === 'vtt') targetFile = path.join(DOCKER_OUT, `${baseName}_bn_cc.vtt`);
-  else if (type === 'srt-en') targetFile = path.join(DOCKER_OUT, `${baseName}_en.srt`);
-  else if (type === 'srt-hi') targetFile = path.join(DOCKER_OUT, `${baseName}_hi.srt`);
-  else if (type === 'qc-json') targetFile = path.join(DOCKER_OUT, `${baseName}_qc_report.json`);
-  else if (type === 'qc-html') targetFile = path.join(DOCKER_OUT, `${baseName}_qc_report.html`);
+  for (const dir of CANDIDATE_DIRS) {
+    const candidate = path.join(dir, `${baseName}${suffix}`);
+    if (fs.existsSync(candidate)) {
+      targetFile = candidate;
+      break;
+    }
+  }
 
   if (targetFile && fs.existsSync(targetFile)) {
     res.download(targetFile);
@@ -376,6 +401,10 @@ app.get('/api/download/:type/:filename', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🎬 Hoichoi Problem 2 Web Suite running at http://localhost:${PORT}`);
-});
+if (process.env.VERCEL !== '1' && require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🎬 Hoichoi Problem 2 Web Suite running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

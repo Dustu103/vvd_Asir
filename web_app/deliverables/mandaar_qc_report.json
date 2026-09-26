@@ -1,0 +1,69 @@
+{
+  "summary": {
+    "video_name": "mandaar",
+    "total_cues": 1,
+    "passed_cues": 0,
+    "flagged_cues": 1,
+    "pass_rate_pct": 0.0,
+    "hallucination_risks_count": 0,
+    "cps_violations_count": 0,
+    "shot_straddles_count": 5,
+    "average_cps": 0.4,
+    "overall_compliance_score": 85.0
+  },
+  "ranked_review_queue": [
+    {
+      "rank": 1,
+      "cue_id": 1,
+      "timecode": "0.00s - 30.02s (30.02s)",
+      "speaker": "CC",
+      "text": "[গুলির শব্দ]",
+      "risk_score": 1.0,
+      "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_LONG",
+          "severity": "LOW",
+          "description": "Duration 30.02s exceeds maximum 6.50s",
+          "risk_weight": 0.25,
+          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_14.00s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_20.33s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_22.83s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_23.00s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_27.83s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        }
+      ]
+    }
+  ]
+}

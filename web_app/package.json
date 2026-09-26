@@ -1,18 +1,25 @@
 {
-  "name": "web_app",
+  "name": "hoichoi-broadcast-captioning",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Hoichoi Problem 2 — Broadcast Subtitle & Diarization Web Suite",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "build": "echo 'Build complete'"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "hoichoi",
+    "speech-recognition",
+    "subtitling",
+    "diarization",
+    "bengali"
+  ],
+  "author": "Dustu103",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
-    "multer": "^2.4.0"
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
   }
 }

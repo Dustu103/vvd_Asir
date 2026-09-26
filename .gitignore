@@ -9,6 +9,7 @@ __pycache__/
 *.avi
 *.mov
 *.wav
+!web_app/public/previews/*.mp4
 
 # Caches and checkpoints
 .cache/

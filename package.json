@@ -1,0 +1,15 @@
+{
+  "name": "vvd-asir",
+  "version": "1.0.0",
+  "description": "Hoichoi Problem 2 — Automated Bengali Subtitle & Closed-Caption Pipeline with Speaker Diarization",
+  "main": "web_app/server.js",
+  "scripts": {
+    "start": "node web_app/server.js",
+    "build": "cd web_app && npm install"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

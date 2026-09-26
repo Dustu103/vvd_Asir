@@ -1,0 +1,105 @@
+{
+  "summary": {
+    "video_name": "test",
+    "total_cues": 3,
+    "passed_cues": 0,
+    "flagged_cues": 3,
+    "pass_rate_pct": 0.0,
+    "hallucination_risks_count": 0,
+    "cps_violations_count": 0,
+    "shot_straddles_count": 6,
+    "average_cps": 3.9,
+    "overall_compliance_score": 82.0
+  },
+  "ranked_review_queue": [
+    {
+      "rank": 1,
+      "cue_id": 1,
+      "timecode": "0.00s - 10.88s (10.88s)",
+      "speaker": "CC",
+      "text": "[নীরবতা]",
+      "risk_score": 1.0,
+      "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_LONG",
+          "severity": "LOW",
+          "description": "Duration 10.88s exceeds maximum 6.50s",
+          "risk_weight": 0.25,
+          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_1.28s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_6.08s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "cue_id": 3,
+      "timecode": "16.80s - 59.62s (42.82s)",
+      "speaker": "SPEAKER_02",
+      "text": "তোপসে, ক্যামেরাটা ঠিক করো — মগনলাল শেঠ সাবধানী লোক।",
+      "risk_score": 1.0,
+      "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_LONG",
+          "severity": "LOW",
+          "description": "Duration 42.82s exceeds maximum 6.50s",
+          "risk_weight": 0.25,
+          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_44.96s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_47.84s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_56.96s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "cue_id": 2,
+      "timecode": "10.96s - 16.29s (5.33s)",
+      "speaker": "SPEAKER_01",
+      "text": "ওর office-এ একটা urgent meeting আছে, জলদি পৌঁছাতে হবে।",
+      "risk_score": 0.6,
+      "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT",
+      "issues": [
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_11.20s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        }
+      ]
+    }
+  ]
+}
