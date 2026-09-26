@@ -64,13 +64,39 @@ class SubtitleSuiteApp {
 
     // Time update & seeking
     this.video.addEventListener('timeupdate', () => this.onTimeUpdate());
+    this.video.addEventListener('seeking', () => this.onTimeUpdate());
+    this.video.addEventListener('seeked', () => this.onTimeUpdate());
     this.video.addEventListener('loadedmetadata', () => {
       this.totalDurationEl.textContent = this.formatTime(this.video.duration);
     });
 
     this.seekBar.addEventListener('input', (e) => {
-      const seekTime = (e.target.value / 100) * this.video.duration;
+      const seekTime = (e.target.value / 100) * (this.video.duration || 300);
       this.video.currentTime = seekTime;
+      this.currentTimeEl.textContent = this.formatTime(seekTime);
+      this.updateSubtitleOverlay(seekTime);
+    });
+    this.seekBar.addEventListener('change', (e) => {
+      const seekTime = (e.target.value / 100) * (this.video.duration || 300);
+      this.video.currentTime = seekTime;
+      this.onTimeUpdate();
+    });
+
+    // Keyboard navigation (ArrowLeft/ArrowRight to skip 5 seconds, Space to Play/Pause)
+    window.addEventListener('keydown', (e) => {
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        this.togglePlay();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        this.video.currentTime = Math.min(this.video.duration || 300, this.video.currentTime + 5);
+        this.onTimeUpdate();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        this.video.currentTime = Math.max(0, this.video.currentTime - 5);
+        this.onTimeUpdate();
+      }
     });
 
     // Subtitle toggle
@@ -405,27 +431,47 @@ class SubtitleSuiteApp {
 
   updateSubtitleOverlay(time) {
     const cues = this.getCurrentCues();
-    const activeCue = cues.find(c => time >= c.start && time <= c.end);
+    if (!cues || !cues.length) {
+      this.overlay.style.display = 'none';
+      return;
+    }
+
+    // Active cue with boundary tolerance
+    const activeCue = cues.find(c => time >= (c.start - 0.1) && time <= (c.end + 0.1));
 
     if (activeCue && this.subtitlesVisible) {
       this.overlay.style.display = 'block';
       this.overlaySpeaker.textContent = activeCue.speaker || 'SPEAKER';
       this.overlaySpeaker.style.display = activeCue.isEvent ? 'none' : 'inline-block';
       this.overlayText.textContent = activeCue.text;
-
-      // Highlight active row in timeline
-      const activeIdx = cues.indexOf(activeCue);
-      if (activeIdx !== this.activeCueIndex) {
-        this.activeCueIndex = activeIdx;
-        this.timelineContainer.querySelectorAll('.cue-row').forEach(r => r.classList.remove('active'));
-        const row = this.timelineContainer.querySelector(`.cue-row[data-idx="${activeIdx}"]`);
-        if (row) {
-          row.classList.add('active');
-          row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      }
     } else {
       this.overlay.style.display = 'none';
+    }
+
+    // When skipping or scrubbing, always track and center the nearest cue in timeline
+    let targetIdx = -1;
+    if (activeCue) {
+      targetIdx = cues.indexOf(activeCue);
+    } else {
+      for (let i = 0; i < cues.length; i++) {
+        if (time >= cues[i].start && (i === cues.length - 1 || time < cues[i + 1].start)) {
+          targetIdx = i;
+          break;
+        }
+      }
+      if (targetIdx === -1 && cues.length > 0 && time < cues[0].start) {
+        targetIdx = 0;
+      }
+    }
+
+    if (targetIdx !== -1 && targetIdx !== this.activeCueIndex) {
+      this.activeCueIndex = targetIdx;
+      this.timelineContainer.querySelectorAll('.cue-row').forEach(r => r.classList.remove('active'));
+      const row = this.timelineContainer.querySelector(`.cue-row[data-idx="${targetIdx}"]`);
+      if (row) {
+        row.classList.add('active');
+        row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
     }
   }
 
