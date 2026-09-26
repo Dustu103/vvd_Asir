@@ -104,6 +104,35 @@ class SubtitleSuiteApp {
       this.filterCues(e.target.value.toLowerCase());
     });
 
+    // Duration Range Selector
+    const durSelect = document.getElementById('max-dur-select');
+    const customDurContainer = document.getElementById('custom-dur-container');
+    if (durSelect && customDurContainer) {
+      durSelect.addEventListener('change', (e) => {
+        customDurContainer.style.display = e.target.value === 'custom' ? 'block' : 'none';
+      });
+    }
+
+    // ML Server Connect Button
+    const saveMlBtn = document.getElementById('btn-save-ml-url');
+    const mlUrlInput = document.getElementById('ml-backend-url-input');
+    if (saveMlBtn && mlUrlInput) {
+      saveMlBtn.addEventListener('click', async () => {
+        saveMlBtn.textContent = 'Connecting...';
+        try {
+          await fetch('/api/set-ml-backend', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url: mlUrlInput.value }),
+          });
+          await this.checkMLStatus();
+        } catch (e) {
+          console.error(e);
+        }
+        saveMlBtn.textContent = 'Connect';
+      });
+    }
+
     // Run pipeline button
     this.runPipelineBtn.addEventListener('click', () => this.triggerPipelineExecution());
 
@@ -128,6 +157,43 @@ class SubtitleSuiteApp {
         this.handleFileUpload(e.dataTransfer.files[0]);
       }
     });
+
+    // Check ML status on startup
+    this.checkMLStatus();
+    setInterval(() => this.checkMLStatus(), 15000);
+  }
+
+  async checkMLStatus() {
+    try {
+      const res = await fetch('/api/ml-status');
+      const data = await res.json();
+      const dot = document.getElementById('ml-status-dot');
+      const text = document.getElementById('ml-status-text');
+      const badge = document.getElementById('ml-device-badge');
+      const sub = document.getElementById('ml-status-sub');
+      const input = document.getElementById('ml-backend-url-input');
+
+      if (data.connected) {
+        if (dot) dot.style.background = '#00e676';
+        if (text) text.textContent = 'ML Model: Online (Ready)';
+        if (badge) {
+          badge.textContent = (data.device || 'CPU').toUpperCase();
+          badge.className = data.cuda_available ? 'badge-red' : 'badge-blue';
+        }
+        if (sub) sub.textContent = `${data.asr_backbone} • ${data.device_name || 'CPU'}`;
+        if (input && data.url) input.value = data.url;
+      } else {
+        if (dot) dot.style.background = '#ff9100';
+        if (text) text.textContent = 'ML Model: Cache Mode';
+        if (badge) {
+          badge.textContent = 'CACHE';
+          badge.className = 'badge-blue';
+        }
+        if (sub) sub.textContent = 'Using broadcast deliverables cache. Connect Colab GPU or local Docker for live inference.';
+      }
+    } catch (e) {
+      console.warn('Could not check ML status:', e);
+    }
   }
 
   async loadEpisodes() {
@@ -183,12 +249,23 @@ class SubtitleSuiteApp {
     this.fetchPipelineData(ep.filename);
   }
 
-  async fetchPipelineData(filename) {
+  getSelectedDuration() {
+    const sel = document.getElementById('max-dur-select');
+    if (!sel) return 30;
+    if (sel.value === 'custom') {
+      const customInput = document.getElementById('max-dur-input');
+      return parseFloat(customInput?.value || 60);
+    }
+    return parseFloat(sel.value);
+  }
+
+  async fetchPipelineData(filename, maxDuration = null, live = false) {
     try {
+      const duration = maxDuration !== null ? maxDuration : this.getSelectedDuration();
       const res = await fetch('/api/run-pipeline', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ videoName: filename, maxDuration: 60 }),
+        body: JSON.stringify({ videoName: filename, maxDuration: duration, live }),
       });
       const data = await res.json();
       this.pipelineData = data;
@@ -383,8 +460,9 @@ class SubtitleSuiteApp {
       step.classList.add('done');
     }
 
-    // Refresh results
-    await this.fetchPipelineData(this.currentEpisode + '.mp4');
+    // Refresh results with live model inference
+    const dur = this.getSelectedDuration();
+    await this.fetchPipelineData(this.currentEpisode + '.mp4', dur, true);
     btn.disabled = false;
     btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Run Full Subtitle Pipeline`;
   }

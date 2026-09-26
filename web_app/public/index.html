@@ -89,12 +89,41 @@
 
         <div class="control-row">
           <div class="control-group half">
-            <label for="max-dur-input">Duration Cap (sec)</label>
-            <input type="number" id="max-dur-input" class="form-control" value="60" min="10" max="600">
+            <label for="max-dur-select">Processing Range</label>
+            <select id="max-dur-select" class="form-control">
+              <option value="30">First 30s (Fast Demo)</option>
+              <option value="60">First 1 Min</option>
+              <option value="300">First 5 Min</option>
+              <option value="0">Full Episode (Whole Video)</option>
+              <option value="custom">Custom Seconds...</option>
+            </select>
           </div>
-          <div class="control-group half">
+          <div class="control-group half" id="cps-container">
             <label for="max-cps-input">Max Broadcast CPS</label>
             <input type="number" id="max-cps-input" class="form-control" value="17.5" step="0.5" min="10" max="25">
+          </div>
+        </div>
+
+        <div class="control-group" id="custom-dur-container" style="display: none;">
+          <label for="max-dur-input">Custom Duration (seconds, 0 = unlimited)</label>
+          <input type="number" id="max-dur-input" class="form-control" value="60" min="5" max="3600">
+        </div>
+
+        <!-- ML Backend Connection Status -->
+        <div class="ml-status-box" id="ml-status-box" style="margin: 12px 0; padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 6px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <div style="display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600;">
+              <span class="status-pulse" id="ml-status-dot" style="width: 8px; height: 8px; background: #00e676; border-radius: 50%; display: inline-block;"></span>
+              <span id="ml-status-text">ML Model: Checking...</span>
+            </div>
+            <span class="badge-blue" id="ml-device-badge" style="font-size: 9px;">CPU</span>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <input type="text" id="ml-backend-url-input" class="form-control" style="font-size: 11px; padding: 4px 8px; height: 28px;" placeholder="http://localhost:8000 or Ngrok URL" value="http://localhost:8000">
+            <button class="btn-secondary" id="btn-save-ml-url" style="padding: 2px 10px; font-size: 11px; height: 28px; white-space: nowrap;">Connect</button>
+          </div>
+          <div id="ml-status-sub" style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">
+            SayedShaun/bengali-whisper-medium + TIES LoRA
           </div>
         </div>
 
