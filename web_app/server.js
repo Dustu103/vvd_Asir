@@ -317,6 +317,14 @@ app.post('/api/run-pipeline', async (req, res) => {
   // 1. If live model execution is requested, proxy to ML backend
   if (live || req.query?.live) {
     try {
+      let videoBase64 = null;
+      const uploadedPath = path.join(UPLOADS_DIR, videoName);
+      if (fs.existsSync(uploadedPath) && fs.statSync(uploadedPath).size < 100 * 1024 * 1024) {
+        try {
+          videoBase64 = fs.readFileSync(uploadedPath).toString('base64');
+        } catch (e) {}
+      }
+
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 min timeout
       const mlResp = await fetch(`${activeMLBackendUrl}/pipeline`, {
@@ -324,6 +332,7 @@ app.post('/api/run-pipeline', async (req, res) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           video_name: videoName,
+          video_base64: videoBase64,
           max_duration: maxDuration,
         }),
         signal: controller.signal,

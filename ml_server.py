@@ -141,19 +141,40 @@ class MLRequestHandler(BaseHTTPRequestHandler):
 
             video_name = data.get("video_name") or data.get("videoName") or "mohanagar.mp4"
             max_duration = float(data.get("max_duration") or data.get("maxDuration") or 60.0)
+            video_base64 = data.get("video_base64")
 
-            # Resolve video path
-            video_path = Path(video_name)
-            if not video_path.exists():
-                candidate = PROJECT_ROOT / video_name
-                if candidate.exists():
-                    video_path = candidate
+            # If video bytes were passed directly (e.g. from cloud web app upload)
+            video_path = None
+            if video_base64:
+                import base64
+                tmp_dir = Path(OUT_DIR) / "_tmp"
+                tmp_dir.mkdir(parents=True, exist_ok=True)
+                clean_name = Path(video_name).name
+                video_path = tmp_dir / f"up_{int(time.time())}_{clean_name}"
+                with open(video_path, "wb") as f:
+                    f.write(base64.b64decode(video_base64))
+                print(f"[ML Server] Decoded uploaded video payload: {video_path} ({video_path.stat().st_size / 1024 / 1024:.1f} MB)")
+
+            if not video_path or not video_path.exists():
+                direct_path = Path(video_name)
+                if direct_path.exists():
+                    video_path = direct_path
                 else:
-                    candidate = Path("/video") / video_name
-                    if candidate.exists():
-                        video_path = candidate
+                    candidates = [
+                        PROJECT_ROOT / video_name,
+                        PROJECT_ROOT / "web_app" / "uploads" / video_name,
+                        PROJECT_ROOT / "uploads" / video_name,
+                        Path("/video") / video_name,
+                        Path("/video") / "uploads" / video_name,
+                        Path("/app") / "uploads" / video_name,
+                        PROJECT_ROOT / "web_app" / "public" / "previews" / video_name,
+                    ]
+                    for cand in candidates:
+                        if cand.exists():
+                            video_path = cand
+                            break
 
-            if not video_path.exists():
+            if not video_path or not video_path.exists():
                 self.send_response(404)
                 self._send_cors_headers()
                 self.end_headers()
