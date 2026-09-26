@@ -1,85 +1,690 @@
 {
   "summary": {
     "video_name": "mohanagar",
-    "total_cues": 48,
-    "passed_cues": 44,
-    "flagged_cues": 4,
-    "pass_rate_pct": 91.7,
-    "hallucination_risks_count": 0,
-    "cps_violations_count": 1,
-    "shot_straddles_count": 0,
-    "average_cps": 11.2,
-    "overall_compliance_score": 97.5
+    "total_cues": 55,
+    "passed_cues": 31,
+    "flagged_cues": 24,
+    "pass_rate_pct": 56.4,
+    "hallucination_risks_count": 1,
+    "cps_violations_count": 10,
+    "shot_straddles_count": 32,
+    "average_cps": 14.7,
+    "overall_compliance_score": 0.0
   },
   "ranked_review_queue": [
     {
       "rank": 1,
-      "cue_id": 8,
-      "timecode": "25.05s - 25.88s (0.83s)",
+      "cue_id": 45,
+      "timecode": "115.07s - 115.91s (0.83s)",
       "speaker": "SPEAKER_01",
-      "text": "আচ্ছা রাখ।",
-      "start_sec": 25.05,
-      "risk_score": 0.45,
-      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "text": "খারাপ লোকেরা তাকে পাঠানোর জন্য তাকে পাঠানোর জন্য তাকে পাঠানোর জন্য তাকে পাঠানোর জন্য তাকে পাঠানোর জন্য তাকে পাঠানোর জন্য তাকে পাঠানোর জন্য",
+      "risk_score": 1.0,
+      "recommended_action": "SPLIT_OR_CONDENSE_DIALOGUE",
       "issues": [
+        {
+          "issue_code": "CPS_EXCEEDED_CRITICAL",
+          "severity": "HIGH",
+          "description": "Extreme reading speed: 164.5 CPS (Limit: 17.5)",
+          "risk_weight": 0.7,
+          "recommended_action": "SPLIT_OR_CONDENSE_DIALOGUE"
+        },
+        {
+          "issue_code": "CPL_EXCEEDED",
+          "severity": "MEDIUM",
+          "description": "Line exceeds 38 chars (Max: 71)",
+          "risk_weight": 0.4,
+          "recommended_action": "INSERT_NATURAL_PUNCTUATION_LINE_BREAK"
+        },
         {
           "issue_code": "DURATION_TOO_SHORT",
           "severity": "MEDIUM",
           "description": "Duration 0.83s is below minimum 0.83s",
+          "risk_weight": 0.4,
           "recommended_action": "PAD_DURATION_TO_MINIMUM"
         }
       ]
     },
     {
       "rank": 2,
-      "cue_id": 10,
-      "timecode": "28.14s - 29.20s (1.06s)",
+      "cue_id": 55,
+      "timecode": "138.59s - 180.00s (41.41s)",
+      "speaker": "CC",
+      "text": "[মিউজিক]",
+      "risk_score": 1.0,
+      "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_LONG",
+          "severity": "LOW",
+          "description": "Duration 41.41s exceeds maximum 6.50s",
+          "risk_weight": 0.25,
+          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_140.48s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_144.00s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_148.64s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_149.76s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_150.56s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_152.64s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_153.12s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_153.60s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_153.76s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_154.56s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_155.52s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_157.60s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_158.08s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_159.04s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_160.32s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_161.12s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_162.08s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_162.72s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_163.52s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_164.48s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_166.72s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_167.04s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_168.16s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_169.60s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_169.76s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_170.24s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_171.36s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_172.64s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_174.08s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_177.28s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_177.76s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "cue_id": 35,
+      "timecode": "81.06s - 82.34s (1.28s)",
       "speaker": "SPEAKER_01",
-      "text": "হাঁটতে হাঁটতে আমারে খুঁজতেছে।",
-      "start_sec": 28.14,
+      "text": "যে আমি কোনো কাজের না",
+      "risk_score": 0.95,
+      "recommended_action": "FLAG_FOR_HUMAN_REVIEW",
+      "issues": [
+        {
+          "issue_code": "HALLUCINATION_RISK",
+          "severity": "CRITICAL",
+          "description": "Suspected hallucination over silence/music (REPETITION_HALLUCINATION (ratio=5.36))",
+          "risk_weight": 0.95,
+          "recommended_action": "FLAG_FOR_HUMAN_REVIEW"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "cue_id": 25,
+      "timecode": "57.71s - 66.16s (8.45s)",
+      "speaker": "CC",
+      "text": "[মিউজিক]",
+      "risk_score": 0.85,
+      "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_LONG",
+          "severity": "LOW",
+          "description": "Duration 8.45s exceeds maximum 6.50s",
+          "risk_weight": 0.25,
+          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
+        },
+        {
+          "issue_code": "SHOT_BOUNDARY_STRADDLE",
+          "severity": "HIGH",
+          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_63.52s)",
+          "risk_weight": 0.6,
+          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "cue_id": 36,
+      "timecode": "82.94s - 90.78s (7.84s)",
+      "speaker": "SPEAKER_01",
+      "text": "স্বয়ং ওসি হ্যারো নিউজটা দেইখা আমারে খুঁজতে খুঁজতে এখানে চলে আসছে রিপোর্টার হিসেবে এটা কিন্তু আমার কম পাওয়া না",
+      "risk_score": 0.65,
+      "recommended_action": "INSERT_NATURAL_PUNCTUATION_LINE_BREAK",
+      "issues": [
+        {
+          "issue_code": "CPL_EXCEEDED",
+          "severity": "MEDIUM",
+          "description": "Line exceeds 38 chars (Max: 56)",
+          "risk_weight": 0.4,
+          "recommended_action": "INSERT_NATURAL_PUNCTUATION_LINE_BREAK"
+        },
+        {
+          "issue_code": "DURATION_TOO_LONG",
+          "severity": "LOW",
+          "description": "Duration 7.84s exceeds maximum 6.50s",
+          "risk_weight": 0.25,
+          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "cue_id": 10,
+      "timecode": "28.14s - 29.15s (1.01s)",
+      "speaker": "SPEAKER_01",
+      "text": "হাঁটতে আমারে খুঁজতেছে",
       "risk_score": 0.45,
       "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS",
       "issues": [
         {
           "issue_code": "CPS_EXCEEDED_WARNING",
           "severity": "MEDIUM",
-          "description": "Reading speed elevated: 24.5 CPS (Limit: 17.5)",
+          "description": "Reading speed elevated: 20.8 CPS (Limit: 17.5)",
+          "risk_weight": 0.45,
           "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS"
         }
       ]
     },
     {
-      "rank": 3,
-      "cue_id": 45,
-      "timecode": "231.00s - 238.00s (7.00s)",
+      "rank": 7,
+      "cue_id": 11,
+      "timecode": "29.66s - 30.75s (1.09s)",
       "speaker": "SPEAKER_01",
-      "text": "আইনের হাত অনেক লম্বা,\nঅপরাধী যতই প্রভাবশালী হোক না কেন।",
-      "start_sec": 231.0,
-      "risk_score": 0.25,
-      "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
+      "text": "বলেই তো চলে আসতাম আমি",
+      "risk_score": 0.45,
+      "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS",
       "issues": [
         {
-          "issue_code": "DURATION_TOO_LONG",
-          "severity": "LOW",
-          "description": "Duration 7.00s exceeds maximum 6.50s",
-          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
+          "issue_code": "CPS_EXCEEDED_WARNING",
+          "severity": "MEDIUM",
+          "description": "Reading speed elevated: 19.3 CPS (Limit: 17.5)",
+          "risk_weight": 0.45,
+          "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS"
         }
       ]
     },
     {
-      "rank": 4,
-      "cue_id": 47,
-      "timecode": "256.00s - 265.00s (9.00s)",
-      "speaker": "SPEAKER_02",
-      "text": "আমরা প্রস্তুত স্যার। সত্যের জয় হবেই।",
-      "start_sec": 256.0,
+      "rank": 8,
+      "cue_id": 22,
+      "timecode": "49.57s - 50.91s (1.34s)",
+      "speaker": "SPEAKER_01",
+      "text": "অভিনেতা আপনার দিয়ে হয় না",
+      "risk_score": 0.45,
+      "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS",
+      "issues": [
+        {
+          "issue_code": "CPS_EXCEEDED_WARNING",
+          "severity": "MEDIUM",
+          "description": "Reading speed elevated: 19.3 CPS (Limit: 17.5)",
+          "risk_weight": 0.45,
+          "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "cue_id": 34,
+      "timecode": "78.93s - 80.51s (1.58s)",
+      "speaker": "SPEAKER_01",
+      "text": "এলে তো আপনি আমার বলতে পারেন না",
+      "risk_score": 0.45,
+      "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS",
+      "issues": [
+        {
+          "issue_code": "CPS_EXCEEDED_WARNING",
+          "severity": "MEDIUM",
+          "description": "Reading speed elevated: 18.9 CPS (Limit: 17.5)",
+          "risk_weight": 0.45,
+          "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "cue_id": 37,
+      "timecode": "91.36s - 92.93s (1.57s)",
+      "speaker": "SPEAKER_01",
+      "text": "আপনি মহান দায়িত্ব পালন করছেন",
+      "risk_score": 0.45,
+      "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS",
+      "issues": [
+        {
+          "issue_code": "CPS_EXCEEDED_WARNING",
+          "severity": "MEDIUM",
+          "description": "Reading speed elevated: 18.5 CPS (Limit: 17.5)",
+          "risk_weight": 0.45,
+          "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS"
+        }
+      ]
+    },
+    {
+      "rank": 11,
+      "cue_id": 39,
+      "timecode": "94.86s - 97.31s (2.45s)",
+      "speaker": "SPEAKER_01",
+      "text": "এই আপনাদের জন্য তদন্তটা ঠিকঠাক মত করতে পারি না",
+      "risk_score": 0.45,
+      "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS",
+      "issues": [
+        {
+          "issue_code": "CPS_EXCEEDED_WARNING",
+          "severity": "MEDIUM",
+          "description": "Reading speed elevated: 18.4 CPS (Limit: 17.5)",
+          "risk_weight": 0.45,
+          "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS"
+        }
+      ]
+    },
+    {
+      "rank": 12,
+      "cue_id": 40,
+      "timecode": "98.59s - 101.54s (2.94s)",
+      "speaker": "SPEAKER_01",
+      "text": "তদন্ত হইল না বিচার হইল না আচার হইল না রায় দিয়ে দিলেন",
+      "risk_score": 0.45,
+      "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS",
+      "issues": [
+        {
+          "issue_code": "CPS_EXCEEDED_WARNING",
+          "severity": "MEDIUM",
+          "description": "Reading speed elevated: 18.0 CPS (Limit: 17.5)",
+          "risk_weight": 0.45,
+          "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS"
+        }
+      ]
+    },
+    {
+      "rank": 13,
+      "cue_id": 52,
+      "timecode": "132.58s - 134.11s (1.54s)",
+      "speaker": "SPEAKER_01",
+      "text": "আপনার ভালোর জন্য উপদেষ্টা দিলাম",
+      "risk_score": 0.45,
+      "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS",
+      "issues": [
+        {
+          "issue_code": "CPS_EXCEEDED_WARNING",
+          "severity": "MEDIUM",
+          "description": "Reading speed elevated: 20.2 CPS (Limit: 17.5)",
+          "risk_weight": 0.45,
+          "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS"
+        }
+      ]
+    },
+    {
+      "rank": 14,
+      "cue_id": 54,
+      "timecode": "135.70s - 137.41s (1.71s)",
+      "speaker": "SPEAKER_01",
+      "text": "পরে বার বললেন না যে আমি কিছু বলি",
+      "risk_score": 0.45,
+      "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS",
+      "issues": [
+        {
+          "issue_code": "CPS_EXCEEDED_WARNING",
+          "severity": "MEDIUM",
+          "description": "Reading speed elevated: 18.7 CPS (Limit: 17.5)",
+          "risk_weight": 0.45,
+          "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS"
+        }
+      ]
+    },
+    {
+      "rank": 15,
+      "cue_id": 8,
+      "timecode": "25.06s - 25.89s (0.83s)",
+      "speaker": "SPEAKER_01",
+      "text": "আচ্ছা রাখ",
+      "risk_score": 0.4,
+      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_SHORT",
+          "severity": "MEDIUM",
+          "description": "Duration 0.83s is below minimum 0.83s",
+          "risk_weight": 0.4,
+          "recommended_action": "PAD_DURATION_TO_MINIMUM"
+        }
+      ]
+    },
+    {
+      "rank": 16,
+      "cue_id": 13,
+      "timecode": "32.40s - 33.15s (0.75s)",
+      "speaker": "SPEAKER_01",
+      "text": "মজা করেন",
+      "risk_score": 0.4,
+      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_SHORT",
+          "severity": "MEDIUM",
+          "description": "Duration 0.75s is below minimum 0.83s",
+          "risk_weight": 0.4,
+          "recommended_action": "PAD_DURATION_TO_MINIMUM"
+        }
+      ]
+    },
+    {
+      "rank": 17,
+      "cue_id": 17,
+      "timecode": "38.22s - 38.98s (0.75s)",
+      "speaker": "SPEAKER_01",
+      "text": "আমি",
+      "risk_score": 0.4,
+      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_SHORT",
+          "severity": "MEDIUM",
+          "description": "Duration 0.75s is below minimum 0.83s",
+          "risk_weight": 0.4,
+          "recommended_action": "PAD_DURATION_TO_MINIMUM"
+        }
+      ]
+    },
+    {
+      "rank": 18,
+      "cue_id": 21,
+      "timecode": "47.04s - 47.87s (0.83s)",
+      "speaker": "SPEAKER_01",
+      "text": "লাভ নাই",
+      "risk_score": 0.4,
+      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_SHORT",
+          "severity": "MEDIUM",
+          "description": "Duration 0.83s is below minimum 0.83s",
+          "risk_weight": 0.4,
+          "recommended_action": "PAD_DURATION_TO_MINIMUM"
+        }
+      ]
+    },
+    {
+      "rank": 19,
+      "cue_id": 26,
+      "timecode": "66.24s - 66.98s (0.74s)",
+      "speaker": "SPEAKER_01",
+      "text": "এটা",
+      "risk_score": 0.4,
+      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_SHORT",
+          "severity": "MEDIUM",
+          "description": "Duration 0.74s is below minimum 0.83s",
+          "risk_weight": 0.4,
+          "recommended_action": "PAD_DURATION_TO_MINIMUM"
+        }
+      ]
+    },
+    {
+      "rank": 20,
+      "cue_id": 27,
+      "timecode": "67.84s - 68.67s (0.83s)",
+      "speaker": "SPEAKER_01",
+      "text": "পড়ছেন আপনি",
+      "risk_score": 0.4,
+      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_SHORT",
+          "severity": "MEDIUM",
+          "description": "Duration 0.83s is below minimum 0.83s",
+          "risk_weight": 0.4,
+          "recommended_action": "PAD_DURATION_TO_MINIMUM"
+        }
+      ]
+    },
+    {
+      "rank": 21,
+      "cue_id": 29,
+      "timecode": "71.90s - 72.74s (0.83s)",
+      "speaker": "SPEAKER_01",
+      "text": "আচ্ছা",
+      "risk_score": 0.4,
+      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_SHORT",
+          "severity": "MEDIUM",
+          "description": "Duration 0.83s is below minimum 0.83s",
+          "risk_weight": 0.4,
+          "recommended_action": "PAD_DURATION_TO_MINIMUM"
+        }
+      ]
+    },
+    {
+      "rank": 22,
+      "cue_id": 30,
+      "timecode": "73.25s - 74.08s (0.83s)",
+      "speaker": "OC_HARUN",
+      "text": "বুঝছি",
+      "risk_score": 0.4,
+      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_SHORT",
+          "severity": "MEDIUM",
+          "description": "Duration 0.83s is below minimum 0.83s",
+          "risk_weight": 0.4,
+          "recommended_action": "PAD_DURATION_TO_MINIMUM"
+        }
+      ]
+    },
+    {
+      "rank": 23,
+      "cue_id": 41,
+      "timecode": "102.43s - 103.27s (0.83s)",
+      "speaker": "SPEAKER_01",
+      "text": "কে বলছে কে",
+      "risk_score": 0.4,
+      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_SHORT",
+          "severity": "MEDIUM",
+          "description": "Duration 0.83s is below minimum 0.83s",
+          "risk_weight": 0.4,
+          "recommended_action": "PAD_DURATION_TO_MINIMUM"
+        }
+      ]
+    },
+    {
+      "rank": 24,
+      "cue_id": 1,
+      "timecode": "0.00s - 9.04s (9.04s)",
+      "speaker": "CC",
+      "text": "[নীরবতা]",
       "risk_score": 0.25,
       "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
       "issues": [
         {
           "issue_code": "DURATION_TOO_LONG",
           "severity": "LOW",
-          "description": "Duration 9.00s exceeds maximum 6.50s",
+          "description": "Duration 9.04s exceeds maximum 6.50s",
+          "risk_weight": 0.25,
           "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
         }
       ]
