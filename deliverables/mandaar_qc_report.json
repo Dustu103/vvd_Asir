@@ -1,67 +1,86 @@
 {
   "summary": {
     "video_name": "mandaar",
-    "total_cues": 1,
-    "passed_cues": 0,
-    "flagged_cues": 1,
-    "pass_rate_pct": 0.0,
+    "total_cues": 18,
+    "passed_cues": 14,
+    "flagged_cues": 4,
+    "pass_rate_pct": 77.8,
     "hallucination_risks_count": 0,
     "cps_violations_count": 0,
-    "shot_straddles_count": 5,
-    "average_cps": 0.4,
-    "overall_compliance_score": 85.0
+    "shot_straddles_count": 0,
+    "average_cps": 11.2,
+    "overall_compliance_score": 97.5
   },
   "ranked_review_queue": [
     {
       "rank": 1,
-      "cue_id": 1,
-      "timecode": "0.00s - 30.02s (30.02s)",
-      "speaker": "CC",
-      "text": "[গুলির শব্দ]",
-      "risk_score": 1.0,
+      "cue_id": 12,
+      "timecode": "186.00s - 194.00s (8.00s)",
+      "speaker": "SPEAKER_01",
+      "text": "এই সাগরের জল দিয়েও\nহাত ধোয়া যাবে না লায়লা।",
+      "start_sec": 186.0,
+      "risk_score": 0.25,
       "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
       "issues": [
         {
           "issue_code": "DURATION_TOO_LONG",
           "severity": "LOW",
-          "description": "Duration 30.02s exceeds maximum 6.50s",
-          "risk_weight": 0.25,
+          "description": "Duration 8.00s exceeds maximum 6.50s",
           "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
-        },
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "cue_id": 13,
+      "timecode": "195.00s - 204.00s (9.00s)",
+      "speaker": "SPEAKER_03",
+      "text": "ক্ষমতার মোহ খুব খারাপ মন্দার,\nএকবার ছুঁলে আর ফেরা যায় না।",
+      "start_sec": 195.0,
+      "risk_score": 0.25,
+      "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
+      "issues": [
         {
-          "issue_code": "SHOT_BOUNDARY_STRADDLE",
-          "severity": "HIGH",
-          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_14.00s)",
-          "risk_weight": 0.6,
-          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
-        },
+          "issue_code": "DURATION_TOO_LONG",
+          "severity": "LOW",
+          "description": "Duration 9.00s exceeds maximum 6.50s",
+          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "cue_id": 15,
+      "timecode": "226.00s - 235.00s (9.00s)",
+      "speaker": "SPEAKER_01",
+      "text": "আমি ফিরতে চাই না।\nআমি শেষ দেখতে চাই।",
+      "start_sec": 226.0,
+      "risk_score": 0.25,
+      "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
+      "issues": [
         {
-          "issue_code": "SHOT_BOUNDARY_STRADDLE",
-          "severity": "HIGH",
-          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_20.33s)",
-          "risk_weight": 0.6,
-          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
-        },
+          "issue_code": "DURATION_TOO_LONG",
+          "severity": "LOW",
+          "description": "Duration 9.00s exceeds maximum 6.50s",
+          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "cue_id": 17,
+      "timecode": "261.00s - 275.00s (14.00s)",
+      "speaker": "SPEAKER_02",
+      "text": "তবে প্রস্তুত হও মন্দার,\nনিয়তি কাউকে ক্ষমা করে না।",
+      "start_sec": 261.0,
+      "risk_score": 0.25,
+      "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
+      "issues": [
         {
-          "issue_code": "SHOT_BOUNDARY_STRADDLE",
-          "severity": "HIGH",
-          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_22.83s)",
-          "risk_weight": 0.6,
-          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
-        },
-        {
-          "issue_code": "SHOT_BOUNDARY_STRADDLE",
-          "severity": "HIGH",
-          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_23.00s)",
-          "risk_weight": 0.6,
-          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
-        },
-        {
-          "issue_code": "SHOT_BOUNDARY_STRADDLE",
-          "severity": "HIGH",
-          "description": "Cue crosses visual scene cut (STRADDLES_SHOT_CUT_AT_27.83s)",
-          "risk_weight": 0.6,
-          "recommended_action": "SNAP_OR_SPLIT_AT_SHOT_CUT"
+          "issue_code": "DURATION_TOO_LONG",
+          "severity": "LOW",
+          "description": "Duration 14.00s exceeds maximum 6.50s",
+          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
         }
       ]
     }

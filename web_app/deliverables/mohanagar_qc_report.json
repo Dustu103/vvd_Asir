@@ -1,85 +1,85 @@
 {
   "summary": {
     "video_name": "mohanagar",
-    "total_cues": 11,
-    "passed_cues": 7,
+    "total_cues": 48,
+    "passed_cues": 44,
     "flagged_cues": 4,
-    "pass_rate_pct": 63.6,
+    "pass_rate_pct": 91.7,
     "hallucination_risks_count": 0,
     "cps_violations_count": 1,
     "shot_straddles_count": 0,
-    "average_cps": 10.8,
-    "overall_compliance_score": 98.0
+    "average_cps": 11.2,
+    "overall_compliance_score": 97.5
   },
   "ranked_review_queue": [
     {
       "rank": 1,
-      "cue_id": 10,
-      "timecode": "28.14s - 29.15s (1.01s)",
+      "cue_id": 8,
+      "timecode": "25.05s - 25.88s (0.83s)",
       "speaker": "SPEAKER_01",
-      "text": "হাঁটতে আমারে খুঁজতেছে",
+      "text": "আচ্ছা রাখ।",
+      "start_sec": 25.05,
+      "risk_score": 0.45,
+      "recommended_action": "PAD_DURATION_TO_MINIMUM",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_SHORT",
+          "severity": "MEDIUM",
+          "description": "Duration 0.83s is below minimum 0.83s",
+          "recommended_action": "PAD_DURATION_TO_MINIMUM"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "cue_id": 10,
+      "timecode": "28.14s - 29.20s (1.06s)",
+      "speaker": "SPEAKER_01",
+      "text": "হাঁটতে হাঁটতে আমারে খুঁজতেছে।",
+      "start_sec": 28.14,
       "risk_score": 0.45,
       "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS",
       "issues": [
         {
           "issue_code": "CPS_EXCEEDED_WARNING",
           "severity": "MEDIUM",
-          "description": "Reading speed elevated: 20.8 CPS (Limit: 17.5)",
-          "risk_weight": 0.45,
+          "description": "Reading speed elevated: 24.5 CPS (Limit: 17.5)",
           "recommended_action": "EXTEND_DURATION_IF_SPEECH_PERMITS"
         }
       ]
     },
     {
-      "rank": 2,
-      "cue_id": 8,
-      "timecode": "25.06s - 25.89s (0.83s)",
-      "speaker": "SPEAKER_01",
-      "text": "আচ্ছা রাখ",
-      "risk_score": 0.4,
-      "recommended_action": "PAD_DURATION_TO_MINIMUM",
-      "issues": [
-        {
-          "issue_code": "DURATION_TOO_SHORT",
-          "severity": "MEDIUM",
-          "description": "Duration 0.83s is below minimum 0.83s",
-          "risk_weight": 0.4,
-          "recommended_action": "PAD_DURATION_TO_MINIMUM"
-        }
-      ]
-    },
-    {
       "rank": 3,
-      "cue_id": 11,
-      "timecode": "29.66s - 30.50s (0.83s)",
+      "cue_id": 45,
+      "timecode": "231.00s - 238.00s (7.00s)",
       "speaker": "SPEAKER_01",
-      "text": "বলিত",
-      "risk_score": 0.4,
-      "recommended_action": "PAD_DURATION_TO_MINIMUM",
-      "issues": [
-        {
-          "issue_code": "DURATION_TOO_SHORT",
-          "severity": "MEDIUM",
-          "description": "Duration 0.83s is below minimum 0.83s",
-          "risk_weight": 0.4,
-          "recommended_action": "PAD_DURATION_TO_MINIMUM"
-        }
-      ]
-    },
-    {
-      "rank": 4,
-      "cue_id": 1,
-      "timecode": "0.00s - 9.04s (9.04s)",
-      "speaker": "CC",
-      "text": "[নীরবতা]",
+      "text": "আইনের হাত অনেক লম্বা,\nঅপরাধী যতই প্রভাবশালী হোক না কেন।",
+      "start_sec": 231.0,
       "risk_score": 0.25,
       "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
       "issues": [
         {
           "issue_code": "DURATION_TOO_LONG",
           "severity": "LOW",
-          "description": "Duration 9.04s exceeds maximum 6.50s",
-          "risk_weight": 0.25,
+          "description": "Duration 7.00s exceeds maximum 6.50s",
+          "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "cue_id": 47,
+      "timecode": "256.00s - 265.00s (9.00s)",
+      "speaker": "SPEAKER_02",
+      "text": "আমরা প্রস্তুত স্যার। সত্যের জয় হবেই।",
+      "start_sec": 256.0,
+      "risk_score": 0.25,
+      "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES",
+      "issues": [
+        {
+          "issue_code": "DURATION_TOO_LONG",
+          "severity": "LOW",
+          "description": "Duration 9.00s exceeds maximum 6.50s",
           "recommended_action": "SPLIT_INTO_TWO_CONSECUTIVE_CUES"
         }
       ]
