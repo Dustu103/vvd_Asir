@@ -16,7 +16,14 @@ checkpoints/
 .system_generated/
 *.safetensors
 
-# Temporary pipeline files
-**/_tmp/
-docker_out/_tmp/
-.ipynb_checkpoints/
+# Node dependencies and uploads
+node_modules/
+web_app/uploads/
+web_app/node_modules/
+
+# Local data & runs
+data/
+docker_out/
+check_gdrive.py
+check_link.py
+*.tmp

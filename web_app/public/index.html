@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hoichoi OTT — Broadcast Subtitle & Diarization Suite</title>
+  <meta name="description" content="Enterprise Automated Bengali Closed-Captioning, Speaker Diarization, Multilingual Translation, and 10-Point QC Review Pipeline for Hoichoi OTT.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo-mark">H</div>
+      <div class="logo-text">
+        <span class="logo-title">hoichoi <span class="badge-red">AI STUDIO</span></span>
+        <span class="logo-sub">Broadcast Subtitling & Diarization Engine (Problem 2)</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div class="pipeline-pill">
+        <span class="dot-online"></span>
+        <span class="pill-text">Acoustic Guard: <strong>Silero-VAD</strong></span>
+        <span class="pill-divider">•</span>
+        <span class="pill-text">ASR: <strong>TIES-Merged LoRA (High/Mid/Base)</strong></span>
+        <span class="pill-divider">•</span>
+        <span class="pill-text">Spec: <strong>Netflix / BBC Timed-Text</strong></span>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn-ghost" id="btn-docs" onclick="window.open('https://github.com/Dustu103/vvd_Asir', '_blank')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub Repository
+      </button>
+      <div class="status-indicator">
+        <span class="status-pulse"></span>
+        <span>Pipeline Ready</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Workspace -->
+  <main class="app-workspace">
+    
+    <!-- LEFT PANEL: Ingestion & Episode Library -->
+    <aside class="panel-left">
+      <div class="panel-section-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+        <span>Episode Library & Ingestion</span>
+      </div>
+
+      <!-- Episode Card Selector -->
+      <div class="episode-list" id="episode-list">
+        <!-- Dynamically rendered episodes -->
+      </div>
+
+      <!-- Custom Upload Zone -->
+      <div class="upload-box" id="upload-zone">
+        <input type="file" id="video-file-input" accept="video/mp4,video/mkv,video/webm" hidden>
+        <div class="upload-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <p class="upload-title">Drop your OTT Video File here</p>
+        <p class="upload-sub">MP4, MKV, WebM up to 500 MB</p>
+        <button class="btn-secondary" id="btn-browse-file">Browse File</button>
+      </div>
+
+      <!-- Pipeline Configuration -->
+      <div class="config-card">
+        <div class="config-header">
+          <span>Engine Controls</span>
+          <span class="badge-blue">Production</span>
+        </div>
+
+        <div class="control-group">
+          <label for="asr-model-select">ASR Neural Model</label>
+          <select id="asr-model-select" class="form-control">
+            <option value="merged" selected>TIES-Merged PolyWhisper (High+Mid+Base)</option>
+            <option value="high">High Code-Switching Tier Adapter</option>
+            <option value="bengali-whisper-medium">SayedShaun/bengali-whisper-medium (Zero-shot)</option>
+            <option value="whisper-tiny">OpenAI Whisper-tiny (CPU Ultra-fast)</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <div class="control-group half">
+            <label for="max-dur-input">Duration Cap (sec)</label>
+            <input type="number" id="max-dur-input" class="form-control" value="60" min="10" max="600">
+          </div>
+          <div class="control-group half">
+            <label for="max-cps-input">Max Broadcast CPS</label>
+            <input type="number" id="max-cps-input" class="form-control" value="17.5" step="0.5" min="10" max="25">
+          </div>
+        </div>
+
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" id="check-anti-hallucination" checked>
+            <span>Anti-Hallucination Guard (Silence/Music Suppressor)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="check-shot-snapper" checked>
+            <span>Shot-Boundary Snapper (<= 125ms Rule)</span>
+          </label>
+        </div>
+
+        <button class="btn-primary" id="btn-run-pipeline">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          Run Full Subtitle Pipeline
+        </button>
+      </div>
+    </aside>
+
+    <!-- CENTER PANEL: Cinema Player & Live Synced Caption Timeline -->
+    <section class="panel-center">
+      
+      <!-- Stage Execution Progress Bar -->
+      <div class="execution-pipeline" id="execution-pipeline">
+        <div class="stage-step done" id="stage-1">
+          <div class="step-num">1</div>
+          <div class="step-label">Ingestion & Shots</div>
+        </div>
+        <div class="stage-divider"></div>
+        <div class="stage-step done" id="stage-2">
+          <div class="step-num">2</div>
+          <div class="step-label">Silero-VAD & SED</div>
+        </div>
+        <div class="stage-divider"></div>
+        <div class="stage-step done" id="stage-3">
+          <div class="step-num">3</div>
+          <div class="step-label">Diarization</div>
+        </div>
+        <div class="stage-divider"></div>
+        <div class="stage-step done" id="stage-4">
+          <div class="step-num">4</div>
+          <div class="step-label">Code-Switch ASR</div>
+        </div>
+        <div class="stage-divider"></div>
+        <div class="stage-step done" id="stage-5">
+          <div class="step-num">5</div>
+          <div class="step-label">Timed-Text</div>
+        </div>
+        <div class="stage-divider"></div>
+        <div class="stage-step done" id="stage-6">
+          <div class="step-num">6</div>
+          <div class="step-label">Translation</div>
+        </div>
+        <div class="stage-divider"></div>
+        <div class="stage-step done" id="stage-7">
+          <div class="step-num">7</div>
+          <div class="step-label">10-Point QC</div>
+        </div>
+      </div>
+
+      <!-- Cinema Video Player Container -->
+      <div class="player-wrapper">
+        <div class="video-container" id="video-container">
+          <video id="main-video" preload="metadata" playsinline>
+            <source id="video-source" src="/api/video/mohanagar.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+          
+          <!-- Broadcast Subtitle Overlay -->
+          <div class="subtitle-overlay" id="subtitle-overlay">
+            <div class="sub-speaker" id="overlay-speaker">SPEAKER_01</div>
+            <div class="sub-text" id="overlay-text">ওসি হারুন সাহেব থানায় অপেক্ষা করছেন, ফাইলটা নিয়ে চলো।</div>
+          </div>
+
+          <!-- Video Controls Overlay -->
+          <div class="custom-controls">
+            <button class="ctrl-btn" id="btn-play-pause">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" id="play-icon"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="time-readout">
+              <span id="current-time">00:00.0</span> / <span id="total-duration">00:30.0</span>
+            </div>
+            <div class="seek-track-wrapper">
+              <input type="range" id="seek-bar" min="0" max="100" value="0" step="0.1">
+              <div class="shot-markers" id="shot-markers"></div>
+            </div>
+            <button class="ctrl-btn" id="btn-toggle-subtitles" title="Toggle Captions">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4M15 15h2M7 11h2M13 11h4"/></svg>
+            </button>
+            <button class="ctrl-btn" id="btn-fullscreen">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-Track Caption Tabs & Synchronized Transcript Table -->
+      <div class="transcript-section">
+        <div class="track-tabs">
+          <button class="track-tab active" data-lang="bn">
+            <span class="lang-flag">🇧🇩</span> Bengali Closed Captions (WebVTT)
+            <span class="cue-count-badge" id="bn-cue-count">20 Cues</span>
+          </button>
+          <button class="track-tab" data-lang="en">
+            <span class="lang-flag">🇬🇧</span> English Subtitles (SRT)
+            <span class="cue-count-badge" id="en-cue-count">20 Cues</span>
+          </button>
+          <button class="track-tab" data-lang="hi">
+            <span class="lang-flag">🇮🇳</span> Hindi Subtitles (SRT)
+            <span class="cue-count-badge" id="hi-cue-count">20 Cues</span>
+          </button>
+          <div class="search-cues">
+            <input type="text" id="cue-search-input" placeholder="Search transcript...">
+          </div>
+        </div>
+
+        <div class="cue-timeline-container" id="cue-timeline">
+          <!-- Dynamically populated timed cues -->
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: 10-Point QC Audit, Review Queue & Deliverables -->
+    <aside class="panel-right">
+      
+      <!-- QC Compliance Score Card -->
+      <div class="qc-scorecard">
+        <div class="panel-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Broadcast Quality Control (QC)</span>
+        </div>
+
+        <div class="score-display">
+          <div class="score-circle" id="compliance-circle">
+            <span class="score-value" id="compliance-score">100%</span>
+            <span class="score-label">Compliance</span>
+          </div>
+          <div class="score-stats">
+            <div class="stat-item">
+              <span class="stat-title">Pass Rate</span>
+              <span class="stat-value text-green" id="qc-pass-rate">90.0%</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-title">Hallucination Flags</span>
+              <span class="stat-value text-green" id="qc-hallucinations">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-title">Max CPS Rate</span>
+              <span class="stat-value" id="qc-max-cps">16.4 <small>/ 17.5</small></span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-title">Review Items</span>
+              <span class="stat-value text-amber" id="qc-review-count">1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10-Point Compliance Checklist -->
+        <div class="checklist-grid">
+          <div class="check-pill pass"><span class="icon">✓</span> CPS &le; 17.5</div>
+          <div class="check-pill pass"><span class="icon">✓</span> CPL &le; 38</div>
+          <div class="check-pill pass"><span class="icon">✓</span> Lines &le; 2</div>
+          <div class="check-pill pass"><span class="icon">✓</span> Dur &ge; 0.8s</div>
+          <div class="check-pill pass"><span class="icon">✓</span> Shot Boundary Snap</div>
+          <div class="check-pill pass"><span class="icon">✓</span> Gap &ge; 2 frames</div>
+          <div class="check-pill pass"><span class="icon">✓</span> Zero Silence Hallucination</div>
+          <div class="check-pill pass"><span class="icon">✓</span> Unicode NFC Normal</div>
+          <div class="check-pill pass"><span class="icon">✓</span> Speaker Persistence</div>
+          <div class="check-pill pass"><span class="icon">✓</span> SED Tag Conformity</div>
+        </div>
+      </div>
+
+      <!-- Ranked Human Review Queue -->
+      <div class="review-queue-card">
+        <div class="queue-header">
+          <div class="queue-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span>Ranked Review Queue</span>
+          </div>
+          <span class="badge-amber" id="badge-queue-count">1 to Inspect</span>
+        </div>
+
+        <div class="review-items-list" id="review-items-list">
+          <!-- Populated with ranked review items -->
+        </div>
+      </div>
+
+      <!-- Speaker Timeline Breakdown -->
+      <div class="speaker-breakdown-card">
+        <div class="queue-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Speaker Attribution & Turns</span>
+        </div>
+        <div class="speaker-chip-list" id="speaker-chip-list">
+          <!-- Speaker chips -->
+        </div>
+      </div>
+
+      <!-- Deliverables Download Center -->
+      <div class="export-card">
+        <div class="panel-section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Broadcast Deliverables</span>
+        </div>
+        <div class="download-grid">
+          <button class="btn-dl" id="dl-vtt" onclick="app.downloadDeliverable('vtt')">
+            <span class="dl-type">WebVTT</span>
+            <span class="dl-desc">Bengali CC with Speaker Tags</span>
+          </button>
+          <button class="btn-dl" id="dl-srt-en" onclick="app.downloadDeliverable('srt-en')">
+            <span class="dl-type">SRT (EN)</span>
+            <span class="dl-desc">English Subtitles</span>
+          </button>
+          <button class="btn-dl" id="dl-srt-hi" onclick="app.downloadDeliverable('srt-hi')">
+            <span class="dl-type">SRT (HI)</span>
+            <span class="dl-desc">Hindi Subtitles</span>
+          </button>
+          <button class="btn-dl" id="dl-qc-json" onclick="app.downloadDeliverable('qc-json')">
+            <span class="dl-type">QC JSON</span>
+            <span class="dl-desc">Machine Audit Report</span>
+          </button>
+          <button class="btn-dl full" id="dl-qc-html" onclick="app.downloadDeliverable('qc-html')">
+            <span class="dl-type">QC Dashboard (HTML)</span>
+            <span class="dl-desc">Interactive Standalone Audit Report</span>
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

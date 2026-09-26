@@ -201,7 +201,7 @@ class MoLEASREngine:
             with torch.no_grad():
                 try:
                     gen_out = self.model.generate(
-                        feats,
+                        input_features=feats,
                         language="Bengali",
                         task="transcribe",
                         max_new_tokens=256,
@@ -210,7 +210,7 @@ class MoLEASREngine:
                     )
                 except Exception:
                     gen_out = self.model.generate(
-                        feats,
+                        input_features=feats,
                         language="bn",
                         task="transcribe",
                         max_new_tokens=256,

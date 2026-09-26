@@ -1,0 +1,15 @@
+{
+  "base_model": "SayedShaun/bengali-whisper-medium",
+  "adapters_used": [
+    "high",
+    "mid",
+    "base"
+  ],
+  "weights": {
+    "high": 0.5,
+    "mid": 0.3,
+    "base": 0.2
+  },
+  "density": 0.7,
+  "combination": "ties"
+}
