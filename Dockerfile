@@ -25,6 +25,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
         scipy>=1.11.0 \
         scikit-learn>=1.3.0 \
         sentencepiece \
+        sacremoses \
         protobuf
 
 # Copy application code, adapters, and deliverables

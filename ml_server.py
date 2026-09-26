@@ -29,7 +29,6 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 import torch
-from problem_2_caption_diarization.src.pipeline import BengaliSubtitlePipeline
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 PORT = int(os.environ.get("PORT", os.environ.get("ML_PORT", 8000)))
@@ -44,16 +43,23 @@ print(f"  Out Dir    : {OUT_DIR}")
 print(f"  Port       : {PORT}")
 print("=" * 68)
 
-# Initialize pipeline instance (loads models and weights)
-print("[ML Server] Initializing BengaliSubtitlePipeline...")
-PIPELINE = BengaliSubtitlePipeline(
-    drive_root=DRIVE_ROOT,
-    output_dir=OUT_DIR,
-    device=DEVICE,
-    base_model_id="SayedShaun/bengali-whisper-medium",
-    use_pyannote=False,
-)
-print("[ML Server] Pipeline loaded and ready for requests.")
+# Lazy-load pipeline on demand to avoid memory spike (>512MB) and port scan delay on cloud free tiers
+PIPELINE = None
+
+def get_pipeline():
+    global PIPELINE
+    if PIPELINE is None:
+        print("[ML Server] Lazy-loading BengaliSubtitlePipeline on first request...")
+        from problem_2_caption_diarization.src.pipeline import BengaliSubtitlePipeline
+        PIPELINE = BengaliSubtitlePipeline(
+            drive_root=DRIVE_ROOT,
+            output_dir=OUT_DIR,
+            device=DEVICE,
+            base_model_id="SayedShaun/bengali-whisper-medium",
+            use_pyannote=False,
+        )
+        print("[ML Server] Pipeline loaded and ready.")
+    return PIPELINE
 
 
 class MLRequestHandler(BaseHTTPRequestHandler):
@@ -157,7 +163,8 @@ class MLRequestHandler(BaseHTTPRequestHandler):
             print(f"[ML Server] Starting pipeline run for {video_path} (max_duration={max_duration}s)...")
             start_t = time.time()
             try:
-                results = PIPELINE.run(
+                pipeline = get_pipeline()
+                results = pipeline.run(
                     video_path=str(video_path),
                     max_duration_sec=max_duration,
                 )
