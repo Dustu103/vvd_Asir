@@ -16,6 +16,8 @@ __pycache__/
 checkpoints/
 .system_generated/
 *.safetensors
+!adapters/merged/adapter_model.safetensors
+!adapters/merged/merged/adapter_model.safetensors
 
 # Node dependencies and uploads
 node_modules/
