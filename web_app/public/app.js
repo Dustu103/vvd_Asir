@@ -277,10 +277,10 @@ class SubtitleSuiteApp {
 
   getSelectedDuration() {
     const sel = document.getElementById('max-dur-select');
-    if (!sel) return 30;
+    if (!sel) return 180;
     if (sel.value === 'custom') {
       const customInput = document.getElementById('max-dur-input');
-      return parseFloat(customInput?.value || 60);
+      return parseFloat(customInput?.value || 180);
     }
     return parseFloat(sel.value);
   }

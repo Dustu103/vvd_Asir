@@ -32,7 +32,7 @@ import torch
 from problem_2_caption_diarization.src.pipeline import BengaliSubtitlePipeline
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-PORT = int(os.environ.get("ML_PORT", 8000))
+PORT = int(os.environ.get("PORT", os.environ.get("ML_PORT", 8000)))
 DRIVE_ROOT = os.environ.get("DRIVE_ROOT", str(PROJECT_ROOT))
 OUT_DIR = os.environ.get("OUT_DIR", str(PROJECT_ROOT / "deliverables"))
 
