@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large media files (exceeds GitHub 100MB limit)
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.wav
+
+# Caches and checkpoints
+.cache/
+checkpoints/
+.system_generated/
+*.safetensors
+
+# Temporary pipeline files
+**/_tmp/
+docker_out/_tmp/
+.ipynb_checkpoints/
