@@ -1,0 +1,65 @@
+# configs/cast_registry.yaml
+# Hoichoi OTT Series Cast Registry for Vocative Attribution
+
+series:
+  feluda:
+    display_title: "Feluda: Sheyal Debota Rohoshyo"
+    characters:
+      - name: "FELUDA"
+        role: "Private Investigator"
+        aliases: ["ফেলুদা", "প্রদোষ", "মিত্র", "feluda", "pradosh", "babu"]
+      - name: "TOPSHE"
+        role: "Assistant & Chronicler"
+        aliases: ["তোপসে", "তপেশ", "topshe", "tapesh"]
+      - name: "JATAYU"
+        role: "Thriller Novelist"
+        aliases: ["জটায়ু", "লালমোহন", "বাবু", "jatayu", "lalmohan"]
+      - name: "MAGANLAL"
+        role: "Antagonist"
+        aliases: ["মগনলাল", "শেঠ", "maganlal", "meghraj"]
+
+  mohanagar:
+    display_title: "Mohanagar"
+    characters:
+      - name: "OC HARUN"
+        role: "Officer-in-Charge"
+        aliases: ["হারুন", "ওসি", "স্যার", "harun", "oc", "sir"]
+      - name: "AFNAN"
+        role: "Suspect"
+        aliases: ["আফনান", "চৌধুরী", "afnan"]
+      - name: "MOLOY"
+        role: "Sub-Inspector"
+        aliases: ["মলয়", "moloy"]
+
+  mandaar:
+    display_title: "Mandaar"
+    characters:
+      - name: "MANDAAR"
+        role: "Protagonist"
+        aliases: ["মান্দার", "মায়াকুমার", "mandaar"]
+      - name: "LAILI"
+        role: "Antagonist"
+        aliases: ["লাইলি", "laili"]
+      - name: "BONKA"
+        role: "Enforcer"
+        aliases: ["বোংকা", "bonka"]
+
+  bhojon_bilashi:
+    display_title: "Bhojon Bilashi"
+    characters:
+      - name: "HOST"
+        role: "Culinary Anchor"
+        aliases: ["শেফ", "দাদা", "host", "chef"]
+      - name: "GUEST"
+        role: "Celebrity Guest"
+        aliases: ["অতিথি", "guest", "babu"]
+
+  money_honey:
+    display_title: "Money Honey"
+    characters:
+      - name: "SHEKHOR"
+        role: "Broker"
+        aliases: ["শেখর", "shekhor"]
+      - name: "SANJU"
+        role: "Partner"
+        aliases: ["সঞ্জু", "sanju"]

@@ -1,0 +1,20 @@
+# ============================================================
+# Hoichoi Problem 2 — Full ML Pipeline Container
+# Base: hoichoi-p2 + PyTorch CPU + Transformers + Translation
+# ============================================================
+FROM hoichoi-p2
+
+# Install PyTorch CPU and HuggingFace ecosystem
+RUN pip install --no-cache-dir \
+    --extra-index-url https://download.pytorch.org/whl/cpu \
+    torch torchaudio \
+    transformers \
+    sentencepiece \
+    sacremoses \
+    peft
+
+# Copy full source and runners
+COPY problem_2_caption_diarization/ ./problem_2_caption_diarization/
+COPY run_problem2.py .
+
+CMD ["python", "run_problem2.py", "--video", "/video/test.mp4", "--outdir", "/out"]

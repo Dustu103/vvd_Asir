@@ -1,0 +1,51 @@
+## hoichoi — Bengali-English Code-Switching ASR + Subtitle Pipeline
+## Python 3.10+  |  Install: pip install -r requirements.txt
+
+# ── Core ML ──────────────────────────────────────────────────────────────────
+torch>=2.2.0
+torchaudio>=2.2.0
+transformers>=4.40.0
+datasets>=2.18.0
+accelerate>=0.29.0
+peft>=0.10.0,<0.14.0
+
+# ── Audio / Signal Processing ─────────────────────────────────────────────────
+librosa>=0.10.1
+soundfile>=0.12.1
+audioread>=3.0.1
+
+# ── Problem 2: VAD — Silero-VAD ───────────────────────────────────────────────
+# Loaded via torch.hub at runtime; no pip package needed.
+# torch.hub.load("snakers4/silero-vad", model="silero_vad")
+
+# ── Problem 2: SED — PANNs CNN14 (AudioSet 527-class tagger) ─────────────────
+panns-inference>=0.1.0
+
+# ── Problem 2: Speaker Diarization — SpeechBrain ECAPA-TDNN ──────────────────
+speechbrain>=1.0.0
+
+# ── Problem 2: Diarization (optional — better DER, needs HF token) ────────────
+# pyannote.audio>=3.1.0    # uncomment + accept gated model terms on HF
+
+# ── Problem 2: Translation ────────────────────────────────────────────────────
+# Helsinki-NLP/opus-mt-bn-en  — auto-downloaded by transformers
+# facebook/nllb-200-distilled-600M — auto-downloaded by transformers
+sacremoses>=0.0.53         # tokenizer dep for Helsinki opus-mt models
+sentencepiece>=0.2.0
+
+# ── Problem 2: Video / Scene-Cut ─────────────────────────────────────────────
+opencv-python>=4.8.0
+
+# ── Evaluation & Metrics ─────────────────────────────────────────────────────
+jiwer>=3.0.3
+unicodedata2>=15.1.0
+
+# ── Data / Utilities ─────────────────────────────────────────────────────────
+pandas>=2.1.0
+numpy>=1.26.0
+scikit-learn>=1.4.0
+tqdm>=4.66.0
+requests>=2.31.0
+
+# ── Notebook ──────────────────────────────────────────────────────────────────
+ipywidgets>=8.1.0

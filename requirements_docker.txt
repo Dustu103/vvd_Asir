@@ -1,0 +1,14 @@
+# Docker-only requirements — ZERO model downloads
+# No transformers, no torch hub, no speechbrain, no panns
+# Pipeline runs entirely on fallback spectral / lexical paths
+
+# Audio extraction & analysis
+soundfile>=0.12.1
+librosa>=0.10.1
+numpy>=1.26.0
+
+# Video shot-cut detection
+opencv-python-headless>=4.8.0
+
+# Everything else the src modules need
+unicodedata2>=15.1.0

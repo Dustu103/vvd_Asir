@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hoichoi-ai"
+version = "2.1.0"
+description = "Production Bengali-English Code-Switched ASR and Broadcast Closed-Caption Pipeline with Speaker Diarization for Hoichoi OTT"
+readme = "README.md"
+authors = [
+    { name = "Hoichoi AI Engineering Team" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.2.0",
+    "torchaudio>=2.2.0",
+    "transformers>=4.40.0",
+    "datasets>=2.18.0",
+    "accelerate>=0.29.0",
+    "peft>=0.10.0,<0.14.0",
+    "librosa>=0.10.1",
+    "soundfile>=0.12.1",
+    "jiwer>=3.0.3",
+    "unicodedata2>=15.1.0",
+    "pandas>=2.1.0",
+    "numpy>=1.26.0",
+    "scikit-learn>=1.4.0",
+    "opencv-python>=4.8.0",
+    "sentencepiece>=0.2.0",
+    "tqdm>=4.66.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "black>=24.0.0",
+    "flake8>=7.0.0"
+]
+
+[project.scripts]
+hoichoi-caption = "src.pipeline.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]

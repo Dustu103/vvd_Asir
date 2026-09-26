@@ -1,0 +1,26 @@
+# configs/qc_policy.yaml
+# Quality Control & Anti-Hallucination Verification Policy
+
+hallucination_defense:
+  max_compression_ratio: 2.2         # zlib compression ratio indicating repetition loop
+  silence_energy_threshold_dbfs: -45.0 # RMS dBFS below which audio is pure silence
+  music_flatness_threshold: 0.22      # High harmonicity + low speech formants = instrumental score
+  whisper_max_no_speech_prob: 0.55   # Whisper internal probability of non-speech
+  whisper_min_avg_logprob: -1.15     # Confidence floor for speech tokens
+  phantom_loop_suppression: true     # Automatically convert pure silence/music hallucinations to sound events
+
+severity_weights:
+  HALLUCINATION_RISK: 1.00          # Top priority (Toughest Test defense)
+  CPS_EXCEEDED_CRITICAL: 0.75       # Extreme unreadable speed (> 22 CPS)
+  LINE_COUNT_EXCEEDED: 0.65         # More than 2 lines
+  SHOT_BOUNDARY_STRADDLE: 0.60      # Subtitle crossing visual cut
+  CPS_EXCEEDED_WARNING: 0.45        # Reading speed 17.5 - 22 CPS
+  CPL_EXCEEDED: 0.40                # Line length > 38 characters
+  DURATION_TOO_SHORT: 0.40          # Duration < 0.833s
+  DURATION_TOO_LONG: 0.25           # Duration > 6.5s
+  INTER_CUE_GAP_TOO_SMALL: 0.20     # Gap < 80ms
+
+review_queue_ranking:
+  sort_by: "composite_risk_score"
+  sort_order: "descending"
+  top_flagged_limit: 100

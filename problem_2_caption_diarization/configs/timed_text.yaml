@@ -1,0 +1,21 @@
+# configs/timed_text.yaml
+# Industry Broadcast Timed-Text Specifications (Netflix / BBC / Hoichoi OTT)
+
+reading_speed:
+  max_cps: 17.5              # Maximum characters per second (standard adult reading speed)
+  critical_cps: 22.0         # Critical threshold triggering automatic review flag
+  unit: "characters_per_second"
+
+line_constraints:
+  max_characters_per_line: 38  # Strict maximum characters per line (Bengali / English / Hindi)
+  max_lines_per_cue: 2         # Maximum 2 lines per subtitle cue
+  line_breaking: "linguistic"  # Break at natural punctuation (।, ?, !, ,, conjunctions)
+
+duration_constraints:
+  min_duration_sec: 0.833      # 20 frames at 24fps (minimum visual persistence)
+  max_duration_sec: 6.500      # Maximum duration before splitting cue
+
+timing_constraints:
+  min_inter_cue_gap_sec: 0.080 # 2 frames at 25fps (~80ms) to avoid persistence flicker
+  shot_snap_threshold_sec: 0.125 # Snap cue to shot cut if within 3 frames (~125ms)
+  forbid_shot_straddle: true   # Flag cues crossing visual scene cuts without dialogue continuity
